@@ -1,0 +1,224 @@
+CREATE SCHEMA PERSISTENT
+	
+	CREATE TABLE PERSISTENT.SLA_TEMPLATE (
+       id_sla_template INT NOT NULL IDENTITY
+     , template VARCHAR(32768)
+	)
+	
+	CREATE TABLE PERSISTENT.SLA (
+       id_sla INT NOT NULL IDENTITY
+     , state VARCHAR(32)
+     , sla VARCHAR(32768)
+	)
+	
+	CREATE TABLE PERSISTENT.DOMAIN (
+       id_domain INT NOT NULL IDENTITY
+     , name VARCHAR(32)
+     , lft INT
+     , rght INT
+	)
+	
+	CREATE TABLE PERSISTENT.PHYSICALRESOURCE (
+       id_physicalresource INT NOT NULL IDENTITY 
+     , name VARCHAR(32)
+     , value VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_RESOURCE_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.OPERATINGSYSTEM (
+       id_operatingsystem INT NOT NULL IDENTITY
+     , id BIGINT
+     , name VARCHAR(32)
+     , version VARCHAR(32)
+     , flavour VARCHAR(32)
+     , hypervisor VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_OS_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.SOFTRESOURCE (
+       id_softresource INT NOT NULL IDENTITY
+     , name VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_SOFT_RESOURCES_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.VIRTUALRUNTIME (
+       id_virtualruntime INT NOT NULL IDENTITY
+     , name VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_VR_2 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.VIRTUALCONTAINER (
+       id_virtualcontainer INT NOT NULL IDENTITY
+     , name VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_VC_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.USER (
+       id_user INT NOT NULL IDENTITY
+     , name VARCHAR(128)
+     , reputation INT
+     , credits INT
+     , current_credits INT
+     , passwd VARCHAR(512)
+     , id_sla_template INT
+     , CONSTRAINT FK_USER_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.ORGANIZATION (
+       id_organization INT NOT NULL IDENTITY
+     , name VARCHAR(128)
+     , reputation INT
+     , credits INT
+     , current_credits INT
+     , id_sla_template INT
+     , CONSTRAINT FK_VO_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.SERVICE (
+       id_service INT NOT NULL IDENTITY
+     , name VARCHAR(64)
+     , desc VARCHAR(1024)
+     , epr VARCHAR(64)
+     , id_sla_template INT
+     , CONSTRAINT FK_SERVICE_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.PERMISSION (
+       id_permission INT NOT NULL IDENTITY
+     , target INT
+     , action VARCHAR(32)
+     , source VARCHAR(64)
+     , destiny VARCHAR(64)
+     , allowed BOOLEAN
+     , CONSTRAINT FK_PERMISSIONS_1 FOREIGN KEY (target)
+                  REFERENCES PERSISTENT.DOMAIN (id_domain)
+	)
+	
+	CREATE TABLE PERSISTENT.SOFTADDON (
+       id_softaddon INT NOT NULL IDENTITY
+     , name VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_SOFT_ADD_ON_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.VIRTUALMACHINE (
+       id_virtualmachine INT NOT NULL IDENTITY
+     , name VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_VM_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_SOFTRESOURCE (
+       id_virtualruntime INT NOT NULL
+     , id_softresource INT NOT NULL
+     , PRIMARY KEY (id_virtualruntime, id_softresource)
+     , CONSTRAINT FK_HAS_SOFT_RESOURCE_1 FOREIGN KEY (id_softresource)
+                  REFERENCES PERSISTENT.SOFTRESOURCE (id_softresource)
+     , CONSTRAINT FK_HAS_SOFT_RESOURCE_2 FOREIGN KEY (id_virtualruntime)
+                  REFERENCES PERSISTENT.VIRTUALRUNTIME (id_virtualruntime)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_VIRTUALRUNTIME (
+       id_virtualcontainer INT NOT NULL
+     , id_virtualruntime INT NOT NULL
+     , PRIMARY KEY (id_virtualcontainer, id_virtualruntime)
+     , CONSTRAINT FK_HAS_VR_2 FOREIGN KEY (id_virtualcontainer)
+                  REFERENCES PERSISTENT.VIRTUALCONTAINER (id_virtualcontainer)
+     , CONSTRAINT FK_HAS_VR_1 FOREIGN KEY (id_virtualruntime)
+                  REFERENCES PERSISTENT.VIRTUALRUNTIME (id_virtualruntime)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_USER (
+       id_user INT NOT NULL
+     , id_organization INT NOT NULL
+     , PRIMARY KEY (id_user, id_organization)
+     , CONSTRAINT FK_HAS_USER_1 FOREIGN KEY (id_organization)
+                  REFERENCES PERSISTENT.ORGANIZATION (id_organization)
+     , CONSTRAINT FK_HAS_USER_2 FOREIGN KEY (id_user)
+                  REFERENCES PERSISTENT.USER (id_user)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_DOMAIN (
+       id_domain INT NOT NULL
+     , id_sla_template INT NOT NULL
+     , PRIMARY KEY (id_domain, id_sla_template)
+     , CONSTRAINT FK_HAS_DOMAIN_1 FOREIGN KEY (id_domain)
+                  REFERENCES PERSISTENT.DOMAIN (id_domain)
+     , CONSTRAINT FK_HAS_DOMAIN_2 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.SERVICEVERSION (
+       id_serviceversion INT NOT NULL IDENTITY
+     , version VARCHAR(32)
+     , id_service INT
+     , id_sla_template INT
+     , CONSTRAINT FK_VERSION_1 FOREIGN KEY (id_service)
+                  REFERENCES PERSISTENT.SERVICE (id_service)
+     , CONSTRAINT FK_VERSION_2 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_SLA_TEMPLATE (
+       id_sla INT NOT NULL
+     , id_sla_template INT NOT NULL
+     , PRIMARY KEY (id_sla, id_sla_template)
+     , CONSTRAINT FK_HAS_TEMPLATE_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+     , CONSTRAINT FK_HAS_TEMPLATE_2 FOREIGN KEY (id_sla)
+                  REFERENCES PERSISTENT.SLA (id_sla)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_PERMISSION (
+       id_permission INT NOT NULL
+     , id_sla_template INT NOT NULL
+     , PRIMARY KEY (id_permission, id_sla_template)
+     , CONSTRAINT FK_HAS_PERMISSIONS_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+     , CONSTRAINT FK_HAS_PERMISSIONS_2 FOREIGN KEY (id_permission)
+                  REFERENCES PERSISTENT.PERMISSION (id_permission)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_SOFTADDON (
+       id_softaddon INT NOT NULL
+     , id_softresource INT NOT NULL
+     , PRIMARY KEY (id_softaddon, id_softresource)
+     , CONSTRAINT FK_HAS_ADD_ON_1 FOREIGN KEY (id_softaddon)
+                  REFERENCES PERSISTENT.SOFTADDON (id_softaddon)
+     , CONSTRAINT FK_HAS_ADD_ON_2 FOREIGN KEY (id_softresource)
+                  REFERENCES PERSISTENT.SOFTRESOURCE (id_softresource)
+	)
+	
+	CREATE TABLE PERSISTENT.HAS_PHYSICALRESOURCE (
+       id_virtualmachine INT NOT NULL
+     , id_physicalresource INT NOT NULL
+     , PRIMARY KEY (id_virtualmachine, id_physicalresource)
+     , CONSTRAINT FK_HAS_RESOURCE_1 FOREIGN KEY (id_physicalresource)
+                  REFERENCES PERSISTENT.PHYSICALRESOURCE (id_physicalresource)
+     , CONSTRAINT FK_HAS_RESOURCE_2 FOREIGN KEY (id_virtualmachine)
+                  REFERENCES PERSISTENT.VIRTUALMACHINE (id_virtualmachine)
+	)
+	
+	CREATE TABLE PERSISTENT.GUARANTEE (
+       id_guarantee INT NOT NULL IDENTITY
+     , name VARCHAR(32)
+     , id_sla_template INT
+     , CONSTRAINT FK_GUARANTEE_1 FOREIGN KEY (id_sla_template)
+                  REFERENCES PERSISTENT.SLA_TEMPLATE (id_sla_template)
+	);
+

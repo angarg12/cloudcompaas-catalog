@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clay-model clay-version="2.0.1">
+<database-model author="" begin-script="" end-script="" id="156f770:1239a10de81:-7fdb" name="Catalog" sql-dialect-id="jp.azzurri.clay.dialect.HSQLDB_1_8_0_Dialect" version="1.0">
+<database-model-description>WARNING:&#13;
+&#13;
+HSQLDB 2.0 dialect not supported. Generated SQL schema cannot be used directly, must be formatted and BINARY must be replaces for BLOB.</database-model-description>
+<schema-list>
+<schema id="156f770:1239a10de81:-7fd8" name="CATALOG">
+<table-list>
+<table id="111badc:12f022485db:-7ff4" name="PHYSICALRESOURCE">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ff0" mandatory="true" name="id_physicalresource">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="111badc:12f022485db:-7fef" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="6f29c8:12f0cc37c86:-7fab" mandatory="false" name="value">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7fee" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7ff3" name="PK_PHYSICALRESOURCE">
+<primary-key-column name="id_physicalresource"/>
+</primary-key>
+</table>
+<table id="111badc:12f022485db:-7fed" name="VIRTUALMACHINE">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7fe6" mandatory="true" name="id_virtualmachine">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="111badc:12f022485db:-7fe9" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7fe7" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7fec" name="PK_VIRTUALMACHINE">
+<primary-key-column name="id_virtualmachine"/>
+</primary-key>
+</table>
+<table id="111badc:12f022485db:-7fdd" name="HAS_PHYSICALRESOURCE">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7fd7" mandatory="true" name="id_virtualmachine">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7fd8" mandatory="true" name="id_physicalresource">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7fdc" name="PK_HAS_PHYSICALRESOURCE">
+<primary-key-column name="id_virtualmachine"/>
+<primary-key-column name="id_physicalresource"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="111badc:12f022485db:-7fab" name="FK_HAS_RESOURCE_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PHYSICALRESOURCE" referenced-table="PHYSICALRESOURCE" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_physicalresource" referenced-key-column-name="id_physicalresource"/>
+</foreign-key>
+<foreign-key id="111badc:12f022485db:-7f7d" name="FK_HAS_RESOURCE_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_VIRTUALMACHINE" referenced-table="VIRTUALMACHINE" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_virtualmachine" referenced-key-column-name="id_virtualmachine"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="111badc:12f022485db:-7f10" name="SOFTRESOURCE">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7efc" mandatory="true" name="id_softresource">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="111badc:12f022485db:-7efb" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ef9" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7f0f" name="PK_SOFTRESOURCE">
+<primary-key-column name="id_softresource"/>
+</primary-key>
+</table>
+<table id="111badc:12f022485db:-7f0e" name="HAS_SOFTRESOURCE">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ee7" mandatory="true" name="id_virtualruntime">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ee6" mandatory="true" name="id_softresource">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7f0d" name="PK_HAS_SOFTRESOURCE">
+<primary-key-column name="id_virtualruntime"/>
+<primary-key-column name="id_softresource"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="111badc:12f022485db:-7eab" name="FK_HAS_SOFT_RESOURCE_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_SOFTRESOURCE" referenced-table="SOFTRESOURCE" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_softresource" referenced-key-column-name="id_softresource"/>
+</foreign-key>
+<foreign-key id="111badc:12f022485db:-7e73" name="FK_HAS_SOFT_RESOURCE_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_VIRTUALRUNTIME" referenced-table="VIRTUALRUNTIME" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_virtualruntime" referenced-key-column-name="id_virtualruntime"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="111badc:12f022485db:-7f0a" name="VIRTUALRUNTIME">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7eee" mandatory="true" name="id_virtualruntime">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="111badc:12f022485db:-7eed" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7eea" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7f09" name="PK_VIRTUALRUNTIME">
+<primary-key-column name="id_virtualruntime"/>
+</primary-key>
+</table>
+<table id="111badc:12f022485db:-7ee3" name="HAS_VIRTUALRUNTIME">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ed4" mandatory="true" name="id_virtualcontainer">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ed3" mandatory="true" name="id_virtualruntime">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7ee2" name="PK_HAS_VIRTUALRUNTIME">
+<primary-key-column name="id_virtualcontainer"/>
+<primary-key-column name="id_virtualruntime"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="111badc:12f022485db:-7dfd" name="FK_HAS_VR_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_VIRTUALCONTAINER" referenced-table="VIRTUALCONTAINER" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_virtualcontainer" referenced-key-column-name="id_virtualcontainer"/>
+</foreign-key>
+<foreign-key id="111badc:12f022485db:-7e16" name="FK_HAS_VR_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_VIRTUALRUNTIME" referenced-table="VIRTUALRUNTIME" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_virtualruntime" referenced-key-column-name="id_virtualruntime"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="111badc:12f022485db:-7ee1" name="VIRTUALCONTAINER">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ed9" mandatory="true" name="id_virtualcontainer">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ed8" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7ed7" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7ee0" name="PK_VIRTUALCONTAINER">
+<primary-key-column name="id_virtualcontainer"/>
+</primary-key>
+</table>
+<table id="111badc:12f022485db:-7de5" name="USER">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dd2" mandatory="true" name="id_user">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="128" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dd1" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1af7a03:12f1028ed63:-7fa7" mandatory="false" name="reputation">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1af7a03:12f1028ed63:-7fa6" mandatory="false" name="credits">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1af7a03:12f1028ed63:-7fa0" mandatory="false" name="current_credits">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="512" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dd0" mandatory="false" name="passwd">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dcf" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7de4" name="PK_USER">
+<primary-key-column name="id_user"/>
+</primary-key>
+</table>
+<table id="111badc:12f022485db:-7de3" name="HAS_USER">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dcc" mandatory="true" name="id_user">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dca" mandatory="true" name="id_organization">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7de2" name="PK_HAS_USER">
+<primary-key-column name="id_user"/>
+<primary-key-column name="id_organization"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="111badc:12f022485db:-7db2" name="FK_HAS_USER_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_ORGANIZATION" referenced-table="ORGANIZATION" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_organization" referenced-key-column-name="id_organization"/>
+</foreign-key>
+<foreign-key id="111badc:12f022485db:-7d98" name="FK_HAS_USER_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_USER" referenced-table="USER" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_user" referenced-key-column-name="id_user"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="111badc:12f022485db:-7de1" name="ORGANIZATION">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dd7" mandatory="true" name="id_organization">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="128" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dd6" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1af7a03:12f1028ed63:-7fab" mandatory="false" name="reputation">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1af7a03:12f1028ed63:-7faa" mandatory="false" name="credits">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="1af7a03:12f1028ed63:-7fa3" mandatory="false" name="current_credits">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="111badc:12f022485db:-7dd5" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="111badc:12f022485db:-7de0" name="PK_ORGANIZATION">
+<primary-key-column name="id_organization"/>
+</primary-key>
+</table>
+<table id="6adb31:12f05ac309e:-7fde" name="SERVICE">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fd4" mandatory="true" name="id_service">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="64" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fd3" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="1024" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fd2" mandatory="false" name="desc">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="64" decimal-digits="0" default-value="" id="a80d36:1328b984881:-7f9a" mandatory="false" name="epr">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fd1" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="6adb31:12f05ac309e:-7fdd" name="PK_SERVICE">
+<primary-key-column name="id_service"/>
+</primary-key>
+</table>
+<table id="6adb31:12f05ac309e:-7fdc" name="SERVICEVERSION">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fce" mandatory="true" name="id_serviceversion">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fcd" mandatory="false" name="version">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fcb" mandatory="false" name="id_service">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="6adb31:12f05ac309e:-7fc9" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="6adb31:12f05ac309e:-7fdb" name="PK_SERVICEVERSION">
+<primary-key-column name="id_serviceversion"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="6adb31:12f05ac309e:-7fa9" name="FK_VERSION_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_SERVICE" referenced-table="SERVICE" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_service" referenced-key-column-name="id_service"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="41825e:12f0b491054:-7f66" name="SOFTADDON">
+<column-list>
+<column auto-increment="true" column-size="0" decimal-digits="0" default-value="" id="41825e:12f0b491054:-7f64" mandatory="true" name="id_softaddon">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="32" decimal-digits="0" default-value="" id="41825e:12f0b491054:-7f63" mandatory="false" name="name">
+<data-type name="VARCHAR" selected-variant-pattern="VARCHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="41825e:12f0b491054:-7f61" mandatory="false" name="id_sla_template">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="41825e:12f0b491054:-7f60" name="PK_SOFTADDON">
+<primary-key-column name="id_softaddon"/>
+</primary-key>
+</table>
+<table id="41825e:12f0b491054:-7f5d" name="HAS_SOFTADDON">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="41825e:12f0b491054:-7f59" mandatory="true" name="id_softaddon">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="41825e:12f0b491054:-7f58" mandatory="true" name="id_softresource">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+</column-list>
+<primary-key id="41825e:12f0b491054:-7f5c" name="PK_HAS_SOFTADDON">
+<primary-key-column name="id_softaddon"/>
+<primary-key-column name="id_softresource"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="41825e:12f0b491054:-7f42" name="FK_HAS_ADD_ON_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_SOFTADDON" referenced-table="SOFTADDON" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_softaddon" referenced-key-column-name="id_softaddon"/>
+</foreign-key>
+<foreign-key id="41825e:12f0b491054:-7f1f" name="FK_HAS_ADD_ON_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_SOFTRESOURCE" referenced-table="SOFTRESOURCE" referenced-table-schema="CATALOG" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="id_softresource" referenced-key-column-name="id_softresource"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+</table-list>
+</schema>
+</schema-list>
+</database-model>
+<diagram>
+<table-figure refid="111badc:12f022485db:-7ff4" x="1164" y="33"/>
+<table-figure refid="111badc:12f022485db:-7fed" x="709" y="40"/>
+<table-figure refid="111badc:12f022485db:-7fdd" x="961" y="188"/>
+<table-figure refid="111badc:12f022485db:-7f10" x="1175" y="647"/>
+<table-figure refid="111badc:12f022485db:-7f0e" x="1001" y="771"/>
+<table-figure refid="111badc:12f022485db:-7f0a" x="750" y="647"/>
+<table-figure refid="111badc:12f022485db:-7ee3" x="771" y="542"/>
+<table-figure refid="111badc:12f022485db:-7ee1" x="746" y="412"/>
+<table-figure refid="111badc:12f022485db:-7de5" x="42" y="581"/>
+<table-figure refid="111badc:12f022485db:-7de3" x="247" y="807"/>
+<table-figure refid="111badc:12f022485db:-7de1" x="381" y="588"/>
+<table-figure refid="6adb31:12f05ac309e:-7fde" x="349" y="28"/>
+<table-figure refid="6adb31:12f05ac309e:-7fdc" x="30" y="24"/>
+<table-figure refid="41825e:12f0b491054:-7f66" x="1175" y="412"/>
+<table-figure refid="41825e:12f0b491054:-7f5d" x="1204" y="542"/>
+</diagram>
+</clay-model>
